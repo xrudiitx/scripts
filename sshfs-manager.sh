@@ -14,7 +14,7 @@ mount_sshfs() {
         target_dir="${MOUNT_POINTS[$source_dir]}"
         if ! mountpoint -q "$target_dir"; then
             echo "Mounting $source_dir to $target_dir"
-            if ! sshfs "$source_dir" "$target_dir"; then
+            if ! sshfs -o allow_other,default_permissions "$source_dir" "$target_dir"; then
                 echo "Error: Failed to mount $source_dir to $target_dir"
             fi
         else
